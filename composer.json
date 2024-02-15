@@ -1,0 +1,17 @@
+{
+    "name": "higoraraujobezerra/laraflix",
+    "description": "App with PHP - Catalog Video",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Higor de Araujo Bezerra",
+            "email": "higoraraujobezerra@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core/"
+        }
+    },
+    "require": {}
+}
