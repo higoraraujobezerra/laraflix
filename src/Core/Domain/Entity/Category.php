@@ -4,17 +4,22 @@ namespace Core\Domain\Entity;
 
 use Core\Domain\Entity\Traits\MethodsMagicsTrait;
 use Core\Domain\Validation\DomainValidation;
+use Core\Domain\ValueObject\UUID;
+use DateTime;
 
 class Category
 {
     use MethodsMagicsTrait;
 
     public function __construct(
-        protected string $id = '',
+        protected UUID|string $id = '',
         protected string $name = '',
         protected string $description = '',
-        protected bool $isActive = true
+        protected bool $isActive = true,
+        protected DateTime|string $createdAt = ''
     ) {
+        $this->id = $this->id ? new UUID($this->id) : UUID::random();
+        $this->createdAt = $this->createdAt ? new DateTime($this->createdAt) : new DateTime();
         $this->validate();
     }
 

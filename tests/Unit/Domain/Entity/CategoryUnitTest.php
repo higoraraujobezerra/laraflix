@@ -6,6 +6,7 @@ use Throwable;
 use PHPUnit\Framework\TestCase;
 use Core\Domain\Entity\Category;
 use Core\Domain\Exception\EntityValidationException;
+use Ramsey\Uuid\Uuid as Uuid;
 
 class CategoryUnitTest extends TestCase
 {
@@ -17,9 +18,11 @@ class CategoryUnitTest extends TestCase
             isActive: true
         );
 
+        $this->assertNotEmpty($category->id());
         $this->assertEquals('New Dog', $category->name);
         $this->assertEquals('New desc', $category->description);
         $this->assertEquals(true, $category->isActive);
+        $this->assertNotEmpty($category->createdAt());
     }
 
     public function testActivated()
@@ -47,12 +50,13 @@ class CategoryUnitTest extends TestCase
 
     public function testUpdate()
     {
-        $uuid = 'uuid.value';
+        $uuid = (string) Uuid::uuid4()->toString();
         $category = new Category(
             id: $uuid,
             name: 'New Dog',
             description: 'New desc',
-            isActive: true
+            isActive: true,
+            createdAt: '2024-01-01 12:12:12'
         );
 
         $category->update(
@@ -60,6 +64,7 @@ class CategoryUnitTest extends TestCase
             description: 'New desc'
         );
 
+        $this->assertEquals($uuid, $category->id());
         $this->assertEquals('New Name', $category->name);
         $this->assertEquals('New desc', $category->description);
     }
@@ -67,9 +72,23 @@ class CategoryUnitTest extends TestCase
     public function testExceptionName()
     {
         try {
-            $category = new Category(
+            new Category(
                 name: 'Ne',
                 description: 'New desc'
+            );
+
+            $this->assertTrue(false);
+        } catch (Throwable $th) {
+            $this->assertInstanceOf(EntityValidationException::class, $th);
+        }
+    }
+
+    public function testExceptionDescription()
+    {
+        try {
+            new Category(
+                name: 'Name',
+                description: random_bytes(999999)
             );
 
             $this->assertTrue(false);
