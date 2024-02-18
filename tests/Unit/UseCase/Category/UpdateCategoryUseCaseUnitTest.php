@@ -7,9 +7,11 @@ use stdClass;
 use Ramsey\Uuid\Uuid as Uuid;
 use PHPUnit\Framework\TestCase;
 use Core\Domain\Entity\Category;
+use Core\UseCase\DTO\Category\Update\{
+    CategoryUpdateInputDto,
+    CategoryUpdateOutputDto
+};
 use Core\UseCase\Category\UpdateCategoryUseCase;
-use Core\UseCase\DTO\Category\CategoryUpdateInputDto;
-use Core\UseCase\DTO\Category\CategoryUpdateOutputDto;
 use Core\Domain\Repository\CategoryRepositoryInterface;
 
 class UpdateCategoryUseCaseUnitTest extends TestCase
@@ -34,6 +36,7 @@ class UpdateCategoryUseCaseUnitTest extends TestCase
             $uuid, $categoryName, $categoryDesc
         ]);
         $this->mockEntity->shouldReceive('update');
+        $this->mockEntity->shouldReceive('createdAt')->andReturn('Y-m-d H:i:s');
 
         $this->mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
         $this->mockRepository->shouldReceive('findById')->andReturn($this->mockEntity);

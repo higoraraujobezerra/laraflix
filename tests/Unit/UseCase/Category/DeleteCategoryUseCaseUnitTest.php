@@ -9,11 +9,8 @@ use PHPUnit\Framework\TestCase;
 use Core\Domain\Entity\Category;
 use Core\UseCase\DTO\Category\CategoryInputDto;
 use Core\UseCase\Category\DeleteCategoryUseCase;
-use Core\UseCase\Category\UpdateCategoryUseCase;
-use Core\UseCase\DTO\Category\CategoryUpdateInputDto;
-use Core\UseCase\DTO\Category\CategoryDeleteOutputDto;
-use Core\UseCase\DTO\Category\CategoryUpdateOutputDto;
 use Core\Domain\Repository\CategoryRepositoryInterface;
+use Core\UseCase\DTO\Category\Delete\CategoryDeleteOutputDto;
 
 class DeleteCategoryUseCaseUnitTest extends TestCase
 {

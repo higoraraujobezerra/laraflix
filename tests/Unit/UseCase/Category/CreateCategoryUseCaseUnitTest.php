@@ -7,10 +7,13 @@ use stdClass;
 use Ramsey\Uuid\Uuid as Uuid;
 use PHPUnit\Framework\TestCase;
 use Core\Domain\Entity\Category;
+use Core\UseCase\DTO\Category\Create\{
+    CategoryCreateInputDto,
+    CategoryCreateOutputDto
+};
 use Core\UseCase\Category\CreateCategoryUseCase;
 use Core\Domain\Repository\CategoryRepositoryInterface;
-use Core\UseCase\DTO\Category\CategoryCreateInputDto;
-use Core\UseCase\DTO\Category\CategoryCreateOutputDto;
+
 
 class CreateCategoryUseCaseUnitTest extends TestCase
 {
@@ -34,6 +37,7 @@ class CreateCategoryUseCaseUnitTest extends TestCase
             $categoryName
         ]);
         $this->mockEntity->shouldReceive('id')->andReturn($uuid);
+        $this->mockEntity->shouldReceive('createdAt')->andReturn('Y-m-d H:i:s');
 
         $this->mockRepository = Mockery::mock(stdClass::class, CategoryRepositoryInterface::class);
         $this->mockRepository->shouldReceive('insert')->andReturn($this->mockEntity);

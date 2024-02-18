@@ -2,8 +2,10 @@
 
 namespace Core\UseCase\Category;
 
-use Core\UseCase\DTO\Category\CategoryUpdateInputDto;
-use Core\UseCase\DTO\Category\CategoryUpdateOutputDto;
+use Core\UseCase\DTO\Category\Update\{
+    CategoryUpdateInputDto,
+    CategoryUpdateOutputDto
+};
 use Core\Domain\Repository\CategoryRepositoryInterface;
 
 class UpdateCategoryUseCase
@@ -30,7 +32,8 @@ class UpdateCategoryUseCase
             id: $categoruUpdated->id,
             name: $categoruUpdated->name,
             description: $categoruUpdated->description,
-            is_active: $categoruUpdated->isActive
+            is_active: $categoruUpdated->isActive,
+            created_at: $categoruUpdated->createdAt()
         );
     }
 }

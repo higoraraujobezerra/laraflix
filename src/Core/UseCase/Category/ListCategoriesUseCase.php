@@ -2,8 +2,10 @@
 
 namespace Core\UseCase\Category;
 
-use Core\UseCase\DTO\Category\ListCategoriesInputDto;
-use Core\UseCase\DTO\Category\ListCategoriesOutputDto;
+use Core\UseCase\DTO\Category\List\{
+    ListCategoriesInputDto,
+    ListCategoriesOutputDto
+};
 use Core\Domain\Repository\CategoryRepositoryInterface;
 
 class ListCategoriesUseCase

@@ -3,8 +3,10 @@
 namespace Core\UseCase\Category;
 
 use Core\Domain\Entity\Category;
-use Core\UseCase\DTO\Category\CategoryCreateInputDto;
-use Core\UseCase\DTO\Category\CategoryCreateOutputDto;
+use Core\UseCase\DTO\Category\Create\{
+    CategoryCreateInputDto,
+    CategoryCreateOutputDto
+};
 use Core\Domain\Repository\CategoryRepositoryInterface;
 
 class CreateCategoryUseCase
@@ -30,7 +32,8 @@ class CreateCategoryUseCase
             id: $newCategory->id(),
             name: $newCategory->name,
             description: $newCategory->description,
-            is_active: $newCategory->isActive
+            is_active: $newCategory->isActive,
+            created_at: $newCategory->createdAt()
         );
     }
 }
