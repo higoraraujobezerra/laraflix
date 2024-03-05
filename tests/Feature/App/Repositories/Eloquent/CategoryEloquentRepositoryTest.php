@@ -52,4 +52,13 @@ class CategoryEloquentRepositoryTest extends TestCase
             $this->assertInstanceOf(NotFoundException::class, $th);
         }
     }
+
+    public function testFindAll()
+    {
+        CategoryModel::factory()->count(10)->create();
+
+        $response = $this->repository->findAll();
+
+        $this->assertCount(10, $response);
+    }
 }
