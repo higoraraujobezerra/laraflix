@@ -2,6 +2,6 @@
 	name = Higor Araujo
 	email = higoraraujobezerra@gmail.com
 [credential]
-	helper = "!f() { /var/www/.vscode-server/bin/903b1e9d8990623e3d7da1df3d33db3e42d80eda/node /tmp/vscode-remote-containers-6e564841-90e0-424a-b426-3edfec14cedf.js git-credential-helper $*; }; f"
+	helper = "!f() { /var/www/.vscode-server/bin/903b1e9d8990623e3d7da1df3d33db3e42d80eda/node /tmp/vscode-remote-containers-34de8951-323e-4378-80fe-b08698c6ae77.js git-credential-helper $*; }; f"
 [safe]
 	directory = /workspaces/laraflix
