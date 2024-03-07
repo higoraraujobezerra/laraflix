@@ -5,6 +5,7 @@ namespace Tests\Feature\App\Repositories\Eloquent;
 use Tests\TestCase;
 use App\Models\Category as CategoryModel;
 use Core\Domain\Exception\NotFoundException;
+use Core\Domain\Repository\PaginationInterface;
 use Core\Domain\Entity\Category as CategoryEntity;
 use Core\Domain\Repository\CategoryRepositoryInterface;
 use App\Repositories\Eloquent\CategoryEloquentRepository;
@@ -60,5 +61,23 @@ class CategoryEloquentRepositoryTest extends TestCase
         $response = $this->repository->findAll();
 
         $this->assertCount(10, $response);
+    }
+
+    public function testPaginate()
+    {
+        CategoryModel::factory()->count(100)->create();
+
+        $response = $this->repository->paginate();
+
+        $this->assertInstanceOf(PaginationInterface::class, $response);
+        $this->assertCount(15, $response->items());
+    }
+
+    public function testPaginateEmpty()
+    {
+        $response = $this->repository->paginate();
+
+        $this->assertInstanceOf(PaginationInterface::class, $response);
+        $this->assertCount(0, $response->items());
     }
 }
