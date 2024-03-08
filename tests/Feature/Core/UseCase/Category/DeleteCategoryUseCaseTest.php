@@ -10,11 +10,6 @@ use App\Repositories\Eloquent\CategoryEloquentRepository;
 
 class DeleteCategoryUseCaseTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function testExecute()
     {
         $model = new Category();
