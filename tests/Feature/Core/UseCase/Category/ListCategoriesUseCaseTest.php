@@ -4,9 +4,7 @@ namespace Tests\Feature\Core\UseCase\Category;
 
 use Tests\TestCase;
 use App\Models\Category;
-use Illuminate\Foundation\Testing\WithFaker;
 use Core\UseCase\Category\ListCategoriesUseCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Repositories\Eloquent\CategoryEloquentRepository;
 use Core\UseCase\DTO\Category\List\ListCategoriesInputDto;
 
