@@ -31,7 +31,7 @@ class CategoryController extends Controller
             )
         );
 
-        return CategoryResource::collection(collect($response->items))
+        return CategoryResource::collection($response->items)
             ->additional([
                 'meta' => [
                     'total' => $response->total,
@@ -51,11 +51,11 @@ class CategoryController extends Controller
             input: new CategoryCreateInputDto(
                 name: $request->name,
                 description: $request->description ?? '',
-                isActive: (bool) $request->is_active ?? true
+                isActive: $request->is_active ?? true
             )
         );
 
-        return (new CategoryResource(collect($response)))
+        return (new CategoryResource($response))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
     }
@@ -66,7 +66,7 @@ class CategoryController extends Controller
             new CategoryInputDto($id)
         );
 
-        return (new CategoryResource(collect($response)))
+        return (new CategoryResource($response))
             ->response()
             ->setStatusCode(Response::HTTP_OK);
     }
@@ -83,7 +83,7 @@ class CategoryController extends Controller
             )
         );
 
-        return (new CategoryResource(collect($response)))
+        return (new CategoryResource($response))
             ->response();
     }
 
