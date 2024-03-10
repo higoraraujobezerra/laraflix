@@ -15,6 +15,7 @@ use Core\UseCase\Category\ListCategoriesUseCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use App\Repositories\Eloquent\CategoryEloquentRepository;
+use Core\UseCase\Category\ListCategoryUseCase;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryControllerTest extends TestCase
@@ -56,5 +57,17 @@ class CategoryControllerTest extends TestCase
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(Response::HTTP_CREATED, $response->status());
+    }
+
+    public function testShow()
+    {
+        $categoryDb = Category::factory()->create();
+        $response = $this->controller->show(
+            useCase: new ListCategoryUseCase($this->repository),
+            id: $categoryDb->id
+        );
+
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertEquals(Response::HTTP_OK, $response->status());
     }
 }
