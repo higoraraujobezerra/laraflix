@@ -17,6 +17,7 @@ use Core\UseCase\Category\ListCategoriesUseCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use App\Repositories\Eloquent\CategoryEloquentRepository;
+use Core\UseCase\Category\DeleteCategoryUseCase;
 use Core\UseCase\Category\UpdateCategoryUseCase;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -90,5 +91,16 @@ class CategoryControllerTest extends TestCase
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(Response::HTTP_OK, $response->status());
+    }
+
+    public function testDelete()
+    {
+        $categoryDb = Category::factory()->create();
+        $response = $this->controller->destroy(
+            useCase: new DeleteCategoryUseCase($this->repository),
+            id: $categoryDb->id
+        );
+
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->status());
     }
 }
