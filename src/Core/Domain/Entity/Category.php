@@ -2,10 +2,10 @@
 
 namespace Core\Domain\Entity;
 
-use Core\Domain\Entity\Traits\MethodsMagicsTrait;
-use Core\Domain\Validation\DomainValidation;
-use Core\Domain\ValueObject\UUID;
 use DateTime;
+use Core\Domain\ValueObject\UUID;
+use Core\Domain\Validation\DomainValidation;
+use Core\Domain\Entity\Traits\MethodsMagicsTrait;
 
 class Category
 {
