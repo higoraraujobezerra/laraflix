@@ -102,4 +102,20 @@ class GenreUnitTest extends TestCase
             name: 'N'
         );
     }
+
+    public function testAddCategoryToGenre()
+    {
+        $categoryId = (string) RamseyUuid::uuid4();
+        $genre = new Genre(
+            name: 'Genre'
+        );
+
+        $this->assertIsArray($genre->categoriesId);
+        $this->assertCount(0, $genre->categoriesId);
+
+        $genre->addCategory(categoryId: $categoryId);
+
+        $this->assertIsArray($genre->categoriesId);
+        $this->assertCount(1, $genre->categoriesId);
+    }
 }
