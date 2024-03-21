@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Domain\Entity;
 
+use DateTime;
 use Core\Domain\Entity\Genre;
 use PHPUnit\Framework\TestCase;
 use Core\Domain\ValueObject\UUID;
-use DateTime;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class GenreUnitTest extends TestCase
@@ -62,5 +62,21 @@ class GenreUnitTest extends TestCase
         $this->assertTrue($genre->isActive);
         $genre->disable();
         $this->assertFalse($genre->isActive);
+    }
+
+    public function testUpdate()
+    {
+        $uuid =  new UUID(RamseyUuid::uuid4());
+        $genre = new Genre(
+            id: $uuid,
+            name: 'Genre'
+        );
+
+        $genre->update(
+            name: 'New Name'
+        );
+
+        $this->assertEquals($uuid, $genre->id());
+        $this->assertEquals('New Name', $genre->name);
     }
 }
